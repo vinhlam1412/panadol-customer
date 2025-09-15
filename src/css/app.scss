@@ -1,0 +1,168 @@
+.page {
+  padding: 10px 10px 96px 10px;
+}
+
+.section-container {
+  padding: 10px;
+  background: #ffffff;
+  border-radius: 8px;
+  margin-bottom: 24px;
+}
+
+.zaui-list-item {
+  cursor: pointer;
+}
+
+body {
+  font-family: "Lato", serif;
+}
+
+.home-bottom {
+  margin-top: 5px;
+  font-weight: 700;
+  font-size: 13px;
+  line-height: 16px;
+  text-align: center;
+  letter-spacing: -0.3px;
+
+  color: #B0B0B0;
+}
+
+.zaui-bottom-navigation-item-active .home-bottom {
+  color: #17A049;
+}
+
+.zaui-bottom-navigation-content {
+  padding-top: 10px;
+}
+
+.text-gray {
+  color: #737373;
+}
+
+.text-gray-2 {
+  color: #595959;
+}
+
+.text-red {
+  color: red;
+}
+
+body {
+  --zaui-safe-area-inset-bottom: 10px;
+  --zaui-light-input-border-color: #17A049;
+  --zaui-light-button-primary-background: #17A049;
+  --zaui-light-input-hover-border-color: #1ab653;
+  --zaui-light-picker-option-selected-color: #17A049;
+}
+
+.feature-card-wrapper {
+  border-radius: 14px;
+  border: 2px solid rgba(23, 160, 73, 0.30);
+  position: relative;
+
+  .feature-card-body {
+    background: transparent;
+  }
+
+  .index {
+    z-index: 1;
+    position: absolute;
+    width: 68px;
+    height: 68px;
+    left: 0px;
+    top: 0px;
+
+    svg {
+      border-top-left-radius: 12px;
+    }
+
+    /* 1 */
+
+    .text {
+      position: absolute;
+      width: 10px;
+      height: 19px;
+      left: 24px;
+      top: 18px;
+
+      font-family: 'Lato';
+      font-style: normal;
+      font-weight: 700;
+      font-size: 16px;
+      line-height: 19px;
+      letter-spacing: -0.3px;
+
+      color: #FFFFFF;
+    }
+
+    color: #17A049;
+
+    &.index-primary {
+      color: #F15A24;
+    }
+
+  }
+
+  .title {
+    color: #17A049;
+    font-weight: bold;
+  }
+}
+
+.font-20 {
+  font-size: 20px;
+}
+
+.color-primary {
+  color: #17A049;
+}
+
+@import "zaui-tokens/variables.css";
+
+.text-primary {
+  color: #17A049;
+}
+
+.border-primary {
+  border: 1px solid #17A049;
+}
+
+.bg-primary {
+  background-color: #17A049;
+}
+
+.qr-code-card {
+  background: white;
+  color: #17A049;
+  padding: 10px;
+  filter: drop-shadow(3px 3px 17.9px rgba(152, 152, 155, 0.25));
+}
+
+.qr-code-title {
+  font-family: 'Lato';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 24px;
+  letter-spacing: -0.3px;
+
+  /* DFG/White/Darker */
+  color: #595959;
+}
+
+.text-gray-3 {
+  color: #B0B0B0;
+}
+
+.btn-received {
+  background: #FBCCBB;
+  border-radius: 18px;
+  color: #F15A24;
+  font-weight: 500;
+}
+
+.zaui-picker-title {
+  color: #17A049;
+  font-weight: bold;
+}

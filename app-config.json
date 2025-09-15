@@ -1,0 +1,15 @@
+{
+  "app": {
+    "title": "Hypurx PGApp",
+    "headerColor": "#17A049",
+    "textColor": "white",
+    "leftButton": "none",
+    "statusBar": "transparent",
+    "actionBarHidden": true,
+    "hideAndroidBottomNavigationBar": false,
+    "hideIOSSafeAreaBottom": false
+  },
+  "listCSS": [],
+  "listSyncJS": [],
+  "listAsyncJS": []
+}
