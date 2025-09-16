@@ -81,7 +81,7 @@ if (loading) {
         </p>
         {qrData && (
           <div className="flex items-center justify-center px-6 pb-6 pt-4">
-              <QRCodeSVG width={'100%'} height={'100%'} value={qrData} fgColor={'#17A049'} />
+              <QRCodeSVG width={'100%'} height={'100%'} value={qrData} fgColor={'#000000'} />
         </div>
         )}
       </div>
