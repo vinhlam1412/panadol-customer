@@ -169,12 +169,26 @@ const RegisterPage = () => {
                {errors.store && <p className="text-red-500 text-sm">{errors.store}</p>}
             </div>
 
+
+
+             {/* Note */}
+            <div className="space-y-2 relative">
+              <label className="block text-sm font-medium text-slate-600">
+                Ghi chú
+              </label>
+              <textarea
+                type="text"
+                placeholder="Nhà thuốc A"
+                className={`w-full rounded-xl border px-4 py-3 text-sm border-slate-300`}
+              />
+            </div>
+
             <div className="mt-4 pt-3">
               <button type="submit" className='w-full bg-primary p-3 rounded-2xl text-white'>Xác thực</button>
             </div>
           </form>         
         </div>     
-        <div className="w-screen -translate-x-3 overflow-hidden">
+        <div className="w-screen -translate-x-3 overflow-hidden relative">
           <div className="">
             <BottomHome />
           </div>
