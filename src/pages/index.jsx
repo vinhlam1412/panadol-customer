@@ -1,7 +1,7 @@
 import React, { Suspense, useEffect } from "react";
 import { Box, Page, Spinner } from "zmp-ui";
 import UserCard from "../components/user-card";
-import HeaderHome from "../icons/header-home.svg?react";
+import HeaderHome from '../icons/header-home.svg?react';
 import FeatureCard from "../components/feature-card";
 import { useNavigate } from "react-router-dom";
 import { useRecoilValue } from "recoil";
@@ -35,6 +35,7 @@ const HomePage = () => {
       <div className="w-full h-16">
         <div className="absolute top-0 left-0">
           <HeaderHome />
+          {/* <img className="w-full rounded-xl h-32 object-fill" src={HeaderHome} /> */}
         </div>
       </div>
 
@@ -44,8 +45,8 @@ const HomePage = () => {
         </div>
       </Suspense>
 
-      <div className="section-container relative !mb-0" onClick={() => navigate("/qr-checkin")}>
-        <img className="w-full rounded-xl" src={QrCard} />
+      <div className="section-container relative !mb-0 h-32" onClick={() => navigate("/qr-checkin")}>
+        <img className="w-full rounded-xl h-32 object-fill" src={QrCard} />
         <span className="absolute inset-1/2 left-6 font-bold text-white text-xl">Mã QR Checkin</span>
       </div>
 
@@ -53,7 +54,7 @@ const HomePage = () => {
         <h5 className="font-bold text-gray text-lg">Danh sách chức năng</h5>
         <div className="mt-4 grid grid-cols-2 gap-4">
           <FeatureCard index={1} imgSrc={HistoryImg} title="Tài liệu" href="/document" />
-          <FeatureCard index={2} imgSrc={HistoryImg} title="Khảo sát" href="/survey" primary />
+          <FeatureCard index={2} imgSrc={HistoryImg} title="Khảo sát" href="/survey" />
         </div>
       </div>
     </Page>

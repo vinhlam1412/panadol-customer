@@ -7,6 +7,10 @@ import { useNavigate } from 'react-router';
 import HeaderHome from '../icons/header-home.svg?react';
 import BottomHome from '../icons/bottom-home.svg?react';
 import HomePage from '../pages/index.jsx'
+import logo from "../images/logo.jpg"
+import banner from "../images/banner.jpg"
+
+
 
 const RegisterPage = () => {
   const [fullName, setFullName] = useState('');
@@ -104,12 +108,26 @@ const RegisterPage = () => {
     <Page className="page bg-primary !p-0 relative overflow-x-hidden">
       <div className="bg-white overflow-x-hidden px-3 w-full">
         <div className="w-full h-2">
-          <div className="absolute top-0 left-0">
+          {/* <div className="absolute top-0 left-0">
             <HeaderHome />
-          </div>
+          </div> */}
+           <div className="absolute top-0 left-2">
+                      {/* <HeaderHome /> */}
+                      <img src={logo}
+                        alt="panadol-logo"
+                        className='object-contain h-20 w-20'
+                      />
+                    </div>
         </div>
 
-        <div className="mt-20 text-center">
+        <div className='p-4 mt-16'>
+          <img src = {banner}
+            alt= "banner"
+            className='object-cover h-[15%] w-full rounded-2xl'
+          />
+        </div>
+
+        <div className="mt-2 text-center">
           <h1 className={'font-bold font-20 text-primary'}>ĐIỀN THÔNG TIN</h1>
         </div>
 

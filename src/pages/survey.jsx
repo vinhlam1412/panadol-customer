@@ -5,6 +5,9 @@ import BottomHome from '../icons/bottom-home.svg?react';
 import { useNavigate } from "react-router-dom";
 import { userState } from "../state";
 import { useRecoilValue } from "recoil";
+import banner from "../images/banner.jpg"
+import MainHeader from "../components/main-header";
+
 
 export  const SurveyPage = () => {
   const [rating, setRating] = useState(0);
@@ -63,16 +66,19 @@ if (loading) {
   );
 }
   return (
+    
     <Page className="page bg-primary !p-0 relative overflow-x-hidden">
+        <MainHeader title="Khảo sát"/>
         <div className='bg-white overflow-x-hidden px-3 w-full'>
-          <div className="w-full h-2">
+          {/* <div className="w-full h-2">
             <div className="absolute top-0 left-0">
               <HeaderHome />
             </div>
-          </div>
+          </div> */}
+         
 
-          <div className={"mt-5 pt-5 mx-auto"}>
-            <svg className={"mx-auto"} width="169" height="169" viewBox="0 0 169 169" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <div className={"mt-1 pt-1 mx-auto"}>
+            {/* <svg className={"mx-auto"} width="169" height="169" viewBox="0 0 169 169" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M138.467 18.9642C116.47 19.3106 25.8366 19.4991 3.16694 19.2109C1.82086 19.194 1.71861 16.8999 3.11202 16.8999C26.4805 16.9286 107.263 16.4833 138.424 17.1534C139.923 17.1838 139.516 18.9473 138.467 18.9642Z" fill="#F15A24"/>
               <path d="M111.475 84.8503C109.957 85.5055 108.344 85.9143 106.698 86.0612C106.856 87.9963 106.835 89.9418 106.635 91.8731C106.614 91.9773 106.556 92.0705 106.472 92.1362C106.388 92.2018 106.284 92.2357 106.177 92.2319C106.071 92.228 105.969 92.1867 105.89 92.1152C105.812 92.0436 105.761 91.9465 105.746 91.841C105.588 90.5202 105.958 89.0897 105.692 86.1262C103.715 86.1795 102.789 85.5669 101.052 85.3311C96.7343 84.7414 92.584 83.2687 88.86 81.0047C88.7493 80.9199 88.6765 80.7949 88.6574 80.6569C88.6382 80.5188 88.6743 80.3787 88.7577 80.267C92.5786 75.601 95.5168 70.2775 97.4283 64.5576C97.6539 63.9112 98.4017 63.0425 98.4051 64.1554C98.4144 67.0081 98.0814 69.8591 98.0814 72.7161C98.0814 77.901 98.2192 83.4476 103.271 84.7506C106.368 85.5474 109.252 84.5368 111.169 84.0247C111.624 83.8988 111.962 84.6145 111.475 84.8503Z" fill="#F15A24"/>
               <path d="M104.162 73.7565C103.719 74.6142 105.229 74.5128 106.134 74.5559C106.248 74.5654 106.355 74.6151 106.436 74.6961C106.517 74.7771 106.567 74.8843 106.577 74.9985C106.586 75.1128 106.555 75.2267 106.489 75.3202C106.422 75.4136 106.325 75.4805 106.214 75.509C105.615 75.5895 105.007 75.5551 104.422 75.4076C103.376 75.1905 102.577 74.8051 103.147 73.6331C103.515 72.842 103.933 72.0752 104.399 71.3373C104.456 71.2479 104.544 71.1824 104.646 71.1529C104.747 71.1235 104.857 71.1321 104.953 71.1772C105.049 71.2223 105.125 71.3008 105.167 71.3981C105.21 71.4953 105.215 71.6047 105.183 71.7057C104.895 72.4141 104.554 73.0997 104.162 73.7565Z" fill="#F15A24"/>
@@ -100,14 +106,17 @@ if (loading) {
               <path d="M134.889 92.556C135.103 90.7342 134.912 85.8805 134.92 83.0404C134.92 82.0214 133.963 82.3957 133.929 82.8224C133.725 86.0641 133.717 89.315 133.903 92.5577C133.941 93.0419 134.833 93.0342 134.889 92.556Z" fill="#17A049"/>
               <path d="M137.917 142.533C132.874 141.941 122.414 141.293 115.622 141.181C115.622 137.281 111.892 114.986 109.519 113.121C107.246 111.335 64.1235 111.002 62.3431 114.389C60.0024 118.847 63.8708 146.466 66.007 147.196C69.4825 148.379 135.541 148.182 138.423 147.956C139.93 147.842 140.145 142.792 137.917 142.533ZM75.6544 115.781C73.1498 116.043 70.7534 116.389 68.2555 116.755C66.0932 117.072 65.9402 117.525 65.7053 119.6C65.4076 122.065 65.2648 124.545 65.2778 127.027C65.2778 127.555 64.5097 127.694 64.4395 127.138C64.1162 124.29 64.1378 121.413 64.5037 118.57C64.7454 116.704 65.4332 115.866 67.2922 115.486C70.0409 114.931 72.8468 114.711 75.6484 114.83C75.7622 114.847 75.8663 114.904 75.9417 114.991C76.0172 115.077 76.0591 115.188 76.0598 115.303C76.0605 115.418 76.02 115.53 75.9456 115.617C75.8712 115.705 75.7679 115.763 75.6544 115.781ZM86.6951 134.649C84.908 134.987 82.9721 134.02 82.2749 131.294C81.6691 128.928 82.7819 127.143 84.7474 126.64C89.4541 125.437 91.1736 133.793 86.6951 134.649Z" fill="#F15A24"/>
               <path d="M135.554 78.2352C127.519 70.2728 132.309 59.1095 127.17 53.7074C126.198 52.6597 124.885 51.9912 123.466 51.8209C122.047 51.6507 120.614 51.9898 119.422 52.7779C115.463 46.3399 107.388 44.7817 100.513 46.9238C93.0206 49.2585 90.336 58.4056 96.3507 61.3496C99.5026 62.8926 110.568 63.0235 114.027 62.3535C114.304 65.218 115.376 67.9482 117.121 70.2365C117.3 70.4519 117.55 70.7502 117.848 70.49C118.169 70.2001 118.547 69.9802 118.959 69.8442C119.37 69.7082 119.804 69.6591 120.235 69.6999C120.666 69.7408 121.084 69.8707 121.463 70.0814C121.841 70.2922 122.171 70.5792 122.432 70.9243C122.673 71.2796 122.841 71.6789 122.926 72.0993C123.012 72.5197 123.014 72.9529 122.932 73.374C122.85 73.7951 122.685 74.1958 122.447 74.5531C122.21 74.9104 121.904 75.2172 121.548 75.456C120.514 76.1396 119.777 76.0399 118.62 75.9816C118.257 75.9639 118.19 76.2672 118.165 76.5444C117.808 80.57 117.411 85.1634 118.026 89.167C118.042 89.2781 118.1 89.3787 118.189 89.4473C118.278 89.516 118.39 89.5472 118.501 89.5345C118.613 89.5217 118.715 89.4659 118.786 89.379C118.857 89.292 118.892 89.1808 118.882 89.069C118.89 87.984 118.85 86.899 118.814 85.8132C124.471 86.4461 131.635 83.1371 135.571 79.354C136.195 78.7617 135.749 78.4279 135.554 78.2352ZM105.118 50.6916C103.738 50.6668 102.373 50.9768 101.14 51.5949C99.7704 52.2523 97.445 53.8866 97.6013 55.6002C97.6478 56.114 96.9093 56.4283 96.7174 55.8985C95.7922 53.3449 98.3677 51.3499 100.085 50.4128C101.614 49.5781 103.328 49.1381 105.07 49.1326C107.299 49.1351 106.379 50.7448 105.118 50.6916Z" fill="#F15A24"/>
-            </svg>
-
+            </svg> */}
+          <img src = {banner}
+            alt= "banner"
+            className='object-cover h-[15%] w-full rounded-2xl'
+          />
           </div>
 
     <main className="min-h-screen flex items-start justify-center p-6">
       <div className="w-full max-w-sm bg-white rounded-2xl shadow-sm ring-1 ring-black/5 p-6">
         {/* Title */}
-        <h1 className="text-center text-2xl font-semibold text-emerald-600">Khảo sát</h1>
+        <h1 className="text-center text-2xl font-semibold text-primary">Khảo sát</h1>
 
         {/* Rating */}
         <div className="mt-6">
@@ -135,7 +144,7 @@ if (loading) {
                     className="h-8 w-8 drop-shadow-sm"
                     fill={filled ? "currentColor" : "none"}
                     stroke={filled ? "currentColor" : "#cbd5e1" /* slate-300 */}
-                    color={filled ? "#16a34a" : undefined /* emerald-600 when filled */}
+                    color={filled ? "#ca0600" : undefined /* emerald-600 when filled */}
                     strokeWidth={1.5}
                   >
                     <path
@@ -157,7 +166,7 @@ if (loading) {
             value={note}
             onChange={(e) => setNote(e.target.value)}
             placeholder="Chương trình rất tuyệt vời"
-            className="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm placeholder:text-slate-400 shadow-sm focus:outline-none focus:ring-2 focus:ring-emerald-200 focus:border-emerald-300"
+            className="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm placeholder:text-slate-400 shadow-sm focus:outline-none focus:ring-2 focus:ring-[#ca0600] focus:border-[#ca0600]"
           />
         </div>
 
@@ -165,7 +174,7 @@ if (loading) {
         <button
           type="button"
           disabled={rating === 0 || loading}
-          className= {loading ? "opacity-50 cursor-not-allowed" : "mt-6 w-full rounded-xl bg-emerald-600 px-4 py-3 text-white font-medium disabled:opacity-50 disabled:cursor-not-allowed hover:bg-emerald-700 transition-colors"}
+          className= {loading ? "opacity-50 cursor-not-allowed" : "mt-6 w-full rounded-xl bg-primary px-4 py-3 text-white font-medium disabled:opacity-50 disabled:cursor-not-allowed hover:bg-emerald-700 transition-colors"}
           onClick={() => handleSurvey()}
         >
           Xác thực

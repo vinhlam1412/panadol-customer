@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="163" height="80" viewBox="0 0 163 80" xmlns="http://www.w3.org/2000/svg">
+  <title>Red Swoosh Header</title>
+  <desc>Vector recreation of the curved header using color #ca0600.</desc>
+  <!-- Background -->
+  <rect width="163" height="80" fill="#000000"/>
+  <!-- Curved red shape -->
+  <path fill="#ca0600" d="M0,0 H163 V22 C120,54 62,68 0,79 Z"/>
+</svg>

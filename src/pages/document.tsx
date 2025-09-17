@@ -31,7 +31,7 @@ if (loading) {
     
     <div className="w-full max-w-md p-6">
         {/* Header title */}
-        <h3 className="text-sm font-semibold text-emerald-600 mb-3">Tài liệu về chương trình</h3>
+        <h3 className="text-sm font-semibold text-primary mb-3">Tài liệu về chương trình</h3>
 
         {/* Card */}
         <div className="rounded-xl bg-white shadow-sm ring-1 ring-black/5 p-4">

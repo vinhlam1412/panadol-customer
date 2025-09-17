@@ -6,6 +6,9 @@ import RegisterPage from './register';
 import {useState} from 'react'
 import { useSetRecoilState } from "recoil";
 import { tokenState, userState } from "../state";
+import logo from "../images/logo.jpg"
+import banner from "../images/banner.jpg"
+
 
 const LoginPage = () => {
   const [phone, setPhone] = useState('');
@@ -83,14 +86,27 @@ const LoginPage = () => {
 
   return (
     <Page className="page bg-primary !p-0 relative overflow-x-hidden">
-      <div className="bg-white overflow-x-hidden px-3 w-full">
+      
+      <div className="bg-white overflow-x-hidden px-3 w-full">        
         <div className="w-full h-2">
-          <div className="absolute top-0 left-0">
-            <HeaderHome />
+          <div className="absolute top-0 left-2">
+            {/* <HeaderHome /> */}
+            <img src={logo}
+              alt="panadol-logo"
+              className='object-contain h-20 w-20'
+            />
           </div>
         </div>
 
-        <div className="mt-20 text-center">
+
+        <div className='p-4 mt-16'>
+          <img src = {banner}
+            alt= "banner"
+            className='object-cover h-[15%] w-full rounded-2xl'
+          />
+        </div>
+        
+        <div className="mt-2 text-center">
           <h1 className={'font-bold font-20 text-primary'}>ĐIỀN SỐ ĐIỆN THOẠI</h1>
         </div>
 

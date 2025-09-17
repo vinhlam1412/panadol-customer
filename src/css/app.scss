@@ -29,7 +29,7 @@ body {
 }
 
 .zaui-bottom-navigation-item-active .home-bottom {
-  color: #17A049;
+  color: #ca0600;
 }
 
 .zaui-bottom-navigation-content {
@@ -50,10 +50,10 @@ body {
 
 body {
   --zaui-safe-area-inset-bottom: 10px;
-  --zaui-light-input-border-color: #17A049;
-  --zaui-light-button-primary-background: #17A049;
+  --zaui-light-input-border-color: #ca0600;
+  --zaui-light-button-primary-background: #ca0600;
   --zaui-light-input-hover-border-color: #1ab653;
-  --zaui-light-picker-option-selected-color: #17A049;
+  --zaui-light-picker-option-selected-color: #ca0600;
 }
 
 .feature-card-wrapper {
@@ -96,7 +96,7 @@ body {
       color: #FFFFFF;
     }
 
-    color: #17A049;
+    color: #ca0600;
 
     &.index-primary {
       color: #F15A24;
@@ -105,7 +105,7 @@ body {
   }
 
   .title {
-    color: #17A049;
+    color: #ca0600;
     font-weight: bold;
   }
 }
@@ -115,26 +115,26 @@ body {
 }
 
 .color-primary {
-  color: #17A049;
+  color: #ca0600;
 }
 
 @import "zaui-tokens/variables.css";
 
 .text-primary {
-  color: #17A049;
+  color: #ca0600;
 }
 
 .border-primary {
-  border: 1px solid #17A049;
+  border: 1px solid #ca0600;
 }
 
 .bg-primary {
-  background-color: #17A049;
+  background-color: #ca0600;
 }
 
 .qr-code-card {
   background: white;
-  color: #17A049;
+  color: #ca0600;
   padding: 10px;
   filter: drop-shadow(3px 3px 17.9px rgba(152, 152, 155, 0.25));
 }
@@ -163,6 +163,6 @@ body {
 }
 
 .zaui-picker-title {
-  color: #17A049;
+  color: #ca0600;
   font-weight: bold;
 }
