@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Box, Page, Spinner } from "zmp-ui";
+import { Box, Input, Page, Spinner } from "zmp-ui";
 import HeaderHome from '../icons/header-home.svg?react';
 import BottomHome from '../icons/bottom-home.svg?react';
 import { useNavigate } from "react-router-dom";
@@ -153,8 +153,7 @@ if (loading) {
         {/* Feedback */}
         <div className="mt-6 space-y-2">
           <label className="text-sm font-medium text-slate-700">Chia sẻ cảm nghĩ</label>
-          <input
-            type="text"
+          <textarea 
             value={note}
             onChange={(e) => setNote(e.target.value)}
             placeholder="Chương trình rất tuyệt vời"
