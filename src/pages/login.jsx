@@ -11,7 +11,7 @@ import banner from "../images/banner.jpg"
 
 
 const LoginPage = () => {
-  const [phone, setPhone] = useState('');
+  const [storeId, setStoreId] = useState('');
   const [error, setError] = useState('');
   const setToken = useSetRecoilState(tokenState);
   const setUserInfor = useSetRecoilState(userState);
@@ -24,17 +24,17 @@ const LoginPage = () => {
 
     e.preventDefault();
     // Validate trước
-    if (!VN_PHONE_REGEX.test(phone)) {
-      setError('Số điện thoại không hợp lệ (10 chữ số, bắt đầu bằng 0)');
-      return;
-    }
+    // if (!VN_PHONE_REGEX.test(phone)) {
+    //   setError('Số điện thoại không hợp lệ (10 chữ số, bắt đầu bằng 0)');
+    //   return;
+    // }
     setError('');
 
       try {
       const res = await fetch(`${import.meta.env.VITE_API_URL}/api/user/login`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ phoneNumber: phone }),
+        body: JSON.stringify({ storeId: storeId }),
       });
 
      if (res.status === 200) {
@@ -45,8 +45,10 @@ const LoginPage = () => {
       setUserInfor({
         id: user.id,
         fullName: user.fullName || "",
-        phoneNumber: user.phoneNumber || phone,
+        phoneNumber: user.phoneNumber || "",
         store: user.store || "",
+        storeId: user.storeId || storeId,
+        note: user.note,
         exists: true,
       });
 
@@ -55,8 +57,10 @@ const LoginPage = () => {
       setUserInfor({
         id: undefined,
         fullName: "",
-        phoneNumber: phone,
+        phoneNumber: "",
         store: "",
+        storeId: storeId,
+        note: "",
         exists: false,
       });
     }
@@ -107,26 +111,27 @@ const LoginPage = () => {
         </div>
         
         <div className="mt-2 text-center">
-          <h1 className={'font-bold font-20 text-primary'}>ĐIỀN SỐ ĐIỆN THOẠI</h1>
+          <h1 className={'font-bold font-20 text-primary'}>TRUY CẬP TÀI KHOẢN</h1>
         </div>
 
         <div className="w-full max-w-md mx-auto p-6">
           <form onSubmit={handleSubmit} className="space-y-6">
-            {/* Số điện thoại */}
+            {/* Mã nhà thuốc */}
             <div className="space-y-2">
               <label className="block text-sm font-medium text-slate-600">
-                Số điện thoại
+                Mã nhà thuốc
               </label>
               <input
-                type="tel"
-                placeholder="0903.912.345"
+                type="text"
+                placeholder="AT5256"
+                value={storeId}
                 className="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm placeholder:text-slate-400 shadow-sm focus:outline-none focus:ring-2 focus:ring-slate-300 focus:border-slate-400"
-                onChange = {e => setPhone(e.target.value)}
+                onChange = {e => setStoreId(e.target.value.toLocaleUpperCase())}
               />
             </div>   
             {error && <p className="text-red-500 text-sm">{error}</p>}
             <div className="mt-4 pt-3">
-              <button type="submit" className='w-full bg-primary p-3 rounded-2xl text-white'>Xác thực</button>
+              <button disabled={storeId == ''} type="submit" className='w-full bg-primary p-3 rounded-2xl text-white'>Truy cập</button>
             </div>      
           </form>
         </div>    

@@ -15,7 +15,9 @@ import banner from "../images/banner.jpg"
 const RegisterPage = () => {
   const [fullName, setFullName] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
+  const [storeId, setStoreId] = useState('');
   const [store, setStore] = useState('');
+  const [note, setNote] = useState('');
   const navigate = useNavigate();
   const userInfor = useRecoilValue(userState);
   const userExists = !!userInfor?.exists;
@@ -32,6 +34,8 @@ const RegisterPage = () => {
       setFullName(userInfor.fullName || '');
       setPhoneNumber(userInfor.phoneNumber || '');
       setStore(userInfor.store || '');
+      setStoreId(userInfor.storeId || '');
+      setNote(userInfor.note || "");
     }
     setLoading(false);
   }, [userInfor])
@@ -46,6 +50,7 @@ const RegisterPage = () => {
       newErrors.phoneNumber = 'Số điện thoại không hợp lệ';
     }
     if (!store.trim()) newErrors.store = 'Vui lòng nhập tên nhà thuốc';
+    if (!note.trim()) newErrors.note = 'Vui lòng nhập địa chỉ';
 
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
@@ -53,16 +58,18 @@ const RegisterPage = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setLoading(true);
     
     if (!validateForm()) return;
     
+    setLoading(true);
     try {
-      if (!userExists) {
-        const res = await fetch(`${import.meta.env.VITE_API_URL}/api/user/register`, {
+      // if (!userExists) {
+            
+      // }
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/api/user/register`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ fullName, phoneNumber, store }),
+          body: JSON.stringify({ fullName, phoneNumber, store, storeId, note }),
         });
 
         console.log("handle Submit");
@@ -74,10 +81,11 @@ const RegisterPage = () => {
           fullName: user.fullName || "",
           phoneNumber: user.phoneNumber || "",
           store: user.store || "",
+          storeId: user.storeId || "",
+          note: user.note || "",
           exists: true,
         });
-        setLoading(false);      
-      }
+      setLoading(false);  
       navigate("/", { replace: true });
       setLoading(false);
     } catch (err) {
@@ -133,33 +141,16 @@ const RegisterPage = () => {
 
         <div className="w-full max-w-md mx-auto p-6">
           <form onSubmit={handleSubmit} className="space-y-6">
-            {/* Tên khách hàng */}
-            <div className="space-y-2">
-              <label className="block text-sm font-medium text-slate-600">
-                Tên khách hàng
-              </label>
-              <input
-                type="text"
-                disabled={userExists}
-                value={fullName}
-                placeholder="Nguyễn Văn A"
-                onChange={(e) => setFullName(e.target.value)}
-                className={`w-full rounded-xl border px-4 py-3 text-sm ${
-                  errors.fullName ? 'border-red-500' : 'border-slate-300'
-                }`}
-              />
-              {errors.fullName && <p className="text-red-500 text-sm">{errors.fullName}</p>}
-            </div>
 
-            {/* Số điện thoại */}
+             {/* Số điện thoại */}
             <div className="space-y-2">
               <label className="block text-sm font-medium text-slate-600">
                 Số điện thoại
               </label>
               <input
                 type="tel"
+                disabled={userInfor.phoneNumber != ""}
                 placeholder="0903.912.345"
-                disabled={userExists}
                 value={phoneNumber}
                 onChange={(e) => setPhoneNumber(e.target.value)}
                 className={`w-full rounded-xl border px-4 py-3 text-sm ${
@@ -169,16 +160,36 @@ const RegisterPage = () => {
                {errors.phoneNumber && <p className="text-red-500 text-sm">{errors.phoneNumber}</p>}
             </div>
 
+
+            {/* Tên khách hàng */}
+            <div className="space-y-2">
+              <label className="block text-sm font-medium text-slate-600">
+                Tên khách hàng
+              </label>
+              <input
+                type="text"
+                disabled={userInfor.fullName != ""}
+                value={fullName}
+                placeholder="Nguyễn Văn A"
+                onChange={(e) => setFullName(e.target.value)}
+                className={`w-full rounded-xl border px-4 py-3 text-sm ${
+                  errors.fullName ? 'border-red-500' : 'border-slate-300'
+                }`}
+              />
+              {errors.fullName && <p className="text-red-500 text-sm">{errors.fullName}</p>}
+            </div>
+         
             {/* Nhà thuốc */}
             <div className="space-y-2">
               <label className="block text-sm font-medium text-slate-600">
                 Nhà thuốc
               </label>
-              <input
+              <textarea
                 type="text"
+                style={{height: '50px'}}
                 placeholder="Nhà thuốc A"
                 value={store}
-                disabled={userExists}
+                disabled={userInfor.store != ""}
                 onChange={(e) => setStore(e.target.value)}
                 className={`w-full rounded-xl border px-4 py-3 text-sm ${
                   errors.store ? 'border-red-500' : 'border-slate-300'
@@ -187,22 +198,28 @@ const RegisterPage = () => {
                {errors.store && <p className="text-red-500 text-sm">{errors.store}</p>}
             </div>
 
-
-
              {/* Note */}
             <div className="space-y-2 relative">
               <label className="block text-sm font-medium text-slate-600">
-                Ghi chú
+                Địa chỉ
               </label>
               <textarea
+                style={{height: '80px'}}
                 type="text"
-                placeholder="Nhà thuốc A"
-                className={`w-full rounded-xl border px-4 py-3 text-sm border-slate-300`}
+                value={note}
+                disabled={userInfor.note != ""}
+                onChange={(e) => setNote(e.target.value)}
+                placeholder="Địa chỉ"
+                className={`w-full rounded-xl border px-4 py-3 text-sm ${
+                  errors.note ? 'border-red-500' : 'border-slate-300'
+                }`}             
               />
+               {errors.note && <p className="text-red-500 text-sm">{errors.note}</p>}
             </div>
 
             <div className="mt-4 pt-3">
-              <button type="submit" className='w-full bg-primary p-3 rounded-2xl text-white'>Xác thực</button>
+            <button disabled={!validateForm}
+              type="submit" className='w-full bg-primary p-3 rounded-2xl text-white'>Xác thực</button>
             </div>
           </form>         
         </div>     

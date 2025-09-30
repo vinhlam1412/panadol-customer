@@ -2,7 +2,6 @@ import React, { useEffect, useState, useRef } from 'react';
 import { Button, Page, Spinner, Box, Picker } from 'zmp-ui';
 import MainHeader from '../components/main-header';
 import { QRCodeSVG } from 'qrcode.react';
-import { getAccessToken } from 'zmp-sdk/apis';
 import MainBottomNavigation from '../components/bottom-navigation';
 
 const ProductDropdown = ({ value, onChange, products }) => {

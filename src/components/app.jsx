@@ -17,21 +17,23 @@ import LoginPage from '../pages/login';
 import RegisterPage from '../pages/register';
 import { QRCodeCheckin } from '../pages/qrCheckin';
 import AuthBootstrap from '../auth-bootstrap';
+import DemoApp from '../pages/gsk_vn_ứng_dụng_cho_nhan_vien_y_tế_prototype';
+import CustomerApp from '../pages/khachhang';
 
 const MyApp = () => {
   return (
     <RecoilRoot>
-      <AuthBootstrap>
+      {/* <AuthBootstrap> */}
       <App>
         <SnackbarProvider>
           <BrowserRouter>
-            <AnimationRoutes>
+            <AnimationRoutes>       
               <Route path="/" element={<HomePage></HomePage>}></Route>
               <Route path="/login" element={<LoginPage></LoginPage>}></Route>
               <Route path="/register" element={<RegisterPage></RegisterPage>}></Route>
               <Route path="/qr-checkin" element={<QRCodeCheckin></QRCodeCheckin>}></Route>
               <Route path="/document" element={<ProgramDocumentPage></ProgramDocumentPage>}></Route>
-              <Route path="/survey" element={<SurveyPage></SurveyPage>}></Route>
+              {/* <Route path="/survey" element={<SurveyPage></SurveyPage>}></Route> */}
               <Route path="/qr-reward/:id" element={<QRCodeReward></QRCodeReward>}></Route>
               <Route path="/checkin" element={<CheckInPage></CheckInPage>}></Route>
               <Route path="/checkout" element={<CheckoutPage></CheckoutPage>}></Route>
@@ -44,7 +46,7 @@ const MyApp = () => {
           </BrowserRouter>
         </SnackbarProvider>
       </App>
-      </AuthBootstrap>
+      {/* </AuthBootstrap> */}
     </RecoilRoot>
   );
 };

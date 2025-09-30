@@ -54,7 +54,7 @@ const HomePage = () => {
         <h5 className="font-bold text-gray text-lg">Danh sách chức năng</h5>
         <div className="mt-4 grid grid-cols-2 gap-4">
           <FeatureCard index={1} imgSrc={HistoryImg} title="Tài liệu" href="/document" />
-          <FeatureCard index={2} imgSrc={HistoryImg} title="Khảo sát" href="/survey" />
+          <FeatureCard index={2} imgSrc={HistoryImg} title="Khảo sát" href="/#" />
         </div>
       </div>
     </Page>

@@ -1,6 +1,5 @@
 import React, { useState, useEffect, Suspense } from 'react';
 import { Button, Input, Page, useSnackbar } from 'zmp-ui';
-import { getAccessToken, getLocation } from 'zmp-sdk/apis';
 import MainBottomNavigation from '../components/bottom-navigation';
 import MainHeader from '../components/main-header';
 import UserCard from '../components/user-card';
