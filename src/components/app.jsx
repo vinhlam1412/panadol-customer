@@ -23,7 +23,7 @@ import CustomerApp from '../pages/khachhang';
 const MyApp = () => {
   return (
     <RecoilRoot>
-      {/* <AuthBootstrap> */}
+      <AuthBootstrap>
       <App>
         <SnackbarProvider>
           <BrowserRouter>
@@ -46,7 +46,7 @@ const MyApp = () => {
           </BrowserRouter>
         </SnackbarProvider>
       </App>
-      {/* </AuthBootstrap> */}
+      </AuthBootstrap>
     </RecoilRoot>
   );
 };
