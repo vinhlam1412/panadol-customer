@@ -25,12 +25,13 @@ const localStorageEffect = (key) => ({ setSelf, onSet }) => {
 export const userState = atom({
   key: "userState",
   default: null, // { id, fullName, phoneNumber, store, exists }
-  // effects_UNSTABLE: [localStorageEffect("userState")],
+  effects_UNSTABLE: [localStorageEffect("userState")],
 });
 
 export const tokenState = atom({
   key: "tokenState",
-  default: null, // string token
-  // effects_UNSTABLE: [localStorageEffect("access_token")],
+  default: null, 
+  // string token
+  effects_UNSTABLE: [localStorageEffect("access_token")],
 });
 

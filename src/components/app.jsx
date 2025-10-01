@@ -33,7 +33,7 @@ const MyApp = () => {
               <Route path="/register" element={<RegisterPage></RegisterPage>}></Route>
               <Route path="/qr-checkin" element={<QRCodeCheckin></QRCodeCheckin>}></Route>
               <Route path="/document" element={<ProgramDocumentPage></ProgramDocumentPage>}></Route>
-              {/* <Route path="/survey" element={<SurveyPage></SurveyPage>}></Route> */}
+              <Route path="/survey" element={<SurveyPage></SurveyPage>}></Route>
               <Route path="/qr-reward/:id" element={<QRCodeReward></QRCodeReward>}></Route>
               <Route path="/checkin" element={<CheckInPage></CheckInPage>}></Route>
               <Route path="/checkout" element={<CheckoutPage></CheckoutPage>}></Route>

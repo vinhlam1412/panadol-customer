@@ -30,6 +30,27 @@ const extractTopics = (detail) => {
     .map((s) => String(s).replace(/\\/g, "").trim());
 };
 
+const extractTopics9 = (detail) => {
+  let arr = [];
+  if (Array.isArray(detail?.q9Topics)) {
+    arr = detail.q9Topics;
+  } else if (Array.isArray(detail?.q9_selected)) {
+    arr = detail.q9_selected;
+  } else if (typeof detail?.q9TopicsJson === "string") {
+    try {
+      const parsed = JSON.parse(detail.q9TopicsJson); // kỳ vọng là mảng chuỗi
+      if (Array.isArray(parsed)) arr = parsed;
+    } catch (e) {
+      // fallback: nếu backend trả không chuẩn JSON
+      arr = detail.q9TopicsJson.split(","); 
+    }
+  }
+  // Loại bỏ ký tự "\" thừa và trim
+  return arr
+    .filter(Boolean)
+    .map((s) => String(s).replace(/\\/g, "").trim());
+};
+
 const Star = ({ filled }) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
@@ -84,6 +105,15 @@ const Q7_OPTIONS = [
   "Kỹ năng tư vấn thuốc",
   "Sức khỏe tinh thần – chăm sóc bản thân",
   "Luật Dược",
+  "Huấn luyện chuyên môn có cấp CME"
+];
+
+const Q9_OPTIONS = [
+  "Sức mua giảm.",
+  "Cạnh tranh từ chuỗi nhà thuốc",
+  "Các chính sách mới từ nhà nước (thuế…)",
+  "Sức khỏe tinh thần – chăm sóc bản thân",
+  "Lợi nhuận"
 ];
 
 
@@ -101,6 +131,8 @@ export const SurveyPage = () => {
 
   const [q7, setQ7] = useState([]);
   const [q7Other, setQ7Other] = useState("");
+  const [q9, setQ9] = useState([]);
+  const [q9Other, setQ9Other] = useState("");
   const [feedback, setFeedback] = useState("");
 
   const [loading, setLoading] = useState(false);
@@ -153,6 +185,14 @@ export const SurveyPage = () => {
     );
   };
 
+  const toggleQ9 = (opt) => {
+    if (readOnly) return;
+    setQ9((prev) =>
+      prev.includes(opt) ? prev.filter((x) => x !== opt) : [...prev, opt]
+    );
+  };
+
+
   const handleSurvey = async () => {
     setLoading(true);
     try {
@@ -166,6 +206,8 @@ export const SurveyPage = () => {
         q6,
         q7Topics: q7,
         q7Other: q7Other?.trim() || undefined,
+        q9Topics: q9,
+        q9Other: q9Other?.trim() || undefined,
         feedback: feedback?.trim() || undefined,
       };
 
@@ -223,6 +265,8 @@ export const SurveyPage = () => {
            // ✅ xử lý mọi biến thể Q7 (kể cả q7TopicsJson bị "\" chen vào)
             setQ7(extractTopics(detail));
             setQ7Other(detail?.q7Other || "");
+            setQ9(extractTopics9(detail));
+            setQ9Other(detail?.q9Other || "");
             setFeedback(detail?.feedback || "");
             setReadOnly(true);
             setAnswersLoaded(true);
@@ -305,7 +349,7 @@ export const SurveyPage = () => {
             {/* Q1 */}
             <section className="mt-6">
               <div className="text-sm font-medium text-slate-700">
-                1. Tôi cảm thấy <b>NGƯỜI GIẢM ĐAU</b> đã đồng hành và tri ân vai trò và giá trị của Dược sĩ nhà thuốc
+                1. Tôi cảm thấy chương trình <b>NGƯỜI GIẢM ĐAU</b> đã đồng hành và tri ân vai trò và giá trị của Dược sĩ nhà thuốc
                 <span className="block text-xs text-slate-500 mt-1">(1 sao: Không hài lòng – 5 sao: Rất hài lòng)</span>
               </div>
               <StarRow value={q1} onChange={setQ1} ariaLabelPrefix="Q1 chọn" readOnly={readOnly} />
@@ -314,7 +358,7 @@ export const SurveyPage = () => {
             {/* Q2 */}
             <section className="mt-6">
               <div className="text-sm font-medium text-slate-700">
-                2. “Giảm đau tinh thần: Giải pháp chăm sóc cảm xúc nghề Dược” rất hữu ích và liên quan đến tôi
+                2. Nội dung “Giảm đau tinh thần: Giải pháp chăm sóc cảm xúc nghề Dược” rất hữu ích và liên quan đến tôi
                 <span className="block text-xs text-slate-500 mt-1">(1 sao: Không hài lòng – 5 sao: Rất hài lòng)</span>
               </div>
               <StarRow value={q2} onChange={setQ2} ariaLabelPrefix="Q2 chọn" readOnly={readOnly} />
@@ -323,8 +367,8 @@ export const SurveyPage = () => {
             {/* Q3 */}
             <section className="mt-6">
               <div className="text-sm font-medium text-slate-700">
-                3. “Tác động giảm đau & hạ sốt của Paracetamol” rất hữu ích và liên quan đến tôi
-                <span className="block text-xs text-slate-500 mt-1">(1–5 sao)</span>
+                3. Nội dung “Tác động giảm đau & hạ sốt của Paracetamol” rất hữu ích và liên quan đến tôi
+                <span className="block text-xs text-slate-500 mt-1">(1 sao: Không đồng ý - 5 sao: Rất đồng ý)</span>
               </div>
               <StarRow value={q3} onChange={setQ3} ariaLabelPrefix="Q3 chọn" readOnly={readOnly} />
             </section>
@@ -333,7 +377,7 @@ export const SurveyPage = () => {
             <section className="mt-6">
               <div className="text-sm font-medium text-slate-700">
                 4. Haleon truyền cảm hứng để tôi trở thành “Người Giảm Đau” – một Dược sĩ nhà thuốc thấu cảm và chăm sóc bệnh nhân tốt hơn
-                <span className="block text-xs text-slate-500 mt-1">(1–5 sao)</span>
+                <span className="block text-xs text-slate-500 mt-1">(1 sao: Không đồng ý - 5 sao: Rất đồng ý)</span>
               </div>
               <StarRow value={q4} onChange={setQ4} ariaLabelPrefix="Q4 chọn" readOnly={readOnly} />
             </section>
@@ -342,24 +386,15 @@ export const SurveyPage = () => {
             <section className="mt-6">
               <div className="text-sm font-medium text-slate-700">
                 5. Sau chương trình, tôi dự định áp dụng kiến thức từ chương trình “Người Giảm Đau – Sống nghề dược, cho người, cho mình” tại nhà thuốc để tư vấn cho bệnh nhân tốt hơn
-                <span className="block text-xs text-slate-500 mt-1">(1–5 sao)</span>
+                <span className="block text-xs text-slate-500 mt-1">(1 sao: Không đồng ý - 5 sao: Rất đồng ý)</span>
               </div>
               <StarRow value={q5} onChange={setQ5} ariaLabelPrefix="Q5 chọn" readOnly={readOnly} />
-            </section>
-
-            {/* Q6 */}
-            <section className="mt-6">
-              <div className="text-sm font-medium text-slate-700">
-                6. Tôi sẵn sàng giới thiệu đồng nghiệp Dược sĩ biết về chương trình “Người Giảm Đau”
-                <span className="block text-xs text-slate-500 mt-1">(1–5 sao)</span>
-              </div>
-              <StarRow value={q6} onChange={setQ6} ariaLabelPrefix="Q6 chọn" readOnly={readOnly} />
             </section>
 
             {/* Q7 */}
             <section className="mt-8">
               <div className="text-sm font-medium text-slate-700">
-                7. Anh/chị mong muốn nội dung/hoạt động nào trong các hội thảo tiếp theo? (có thể chọn nhiều đáp án)
+                6. Anh/chị mong muốn nội dung/hoạt động nào trong các hội thảo tiếp theo? (có thể chọn nhiều đáp án)
               </div>
               <div className="mt-3 grid grid-cols-1 sm:grid-cols-2 gap-3">
                 {Q7_OPTIONS.map((opt) => (
@@ -377,7 +412,7 @@ export const SurveyPage = () => {
               </div>
 
               <div className="mt-3">
-                <label className="text-sm text-slate-700">Mục khác:</label>
+                <label className="text-sm text-slate-700">Khác (vui lòng liệt kê):</label>
                 <input
                   type="text"
                   value={q7Other}
@@ -389,9 +424,51 @@ export const SurveyPage = () => {
               </div>
             </section>
 
+            {/* Q9 */}
+            <section className="mt-8">
+              <div className="text-sm font-medium text-slate-700">
+                7. Đâu là những khó khăn của nhà thuốc mà nhà thuốc đang đối diện hiện nay đối với việc giới thiệu sản phẩm Haleon nói riêng và các sản phẩm OTC khác nói chung? (có thể chọn nhiều đáp án)
+              </div>
+              <div className="mt-3 grid grid-cols-1 sm:grid-cols-2 gap-3">
+                {Q9_OPTIONS.map((opt) => (
+                  <label key={opt} className={`flex items-center gap-2 rounded-xl border ${q9.includes(opt) ? "border-primary" : "border-slate-300"} px-3 py-2`}>
+                    <input
+                      type="checkbox"
+                      className="h-4 w-4 accent-[--zmp-primary-color,#ca0600]"
+                      checked={q9.includes(opt)}
+                      onChange={() => toggleQ9(opt)}
+                      disabled={readOnly}
+                    />
+                    <span className="text-sm text-slate-700">{opt}</span>
+                  </label>
+                ))}
+              </div>
+
+              <div className="mt-3">
+                <label className="text-sm text-slate-700">Khác (vui lòng ghi rõ):</label>
+                <input
+                  type="text"
+                  value={q9Other}
+                  onChange={(e) => setQ9Other(e.target.value)}
+                  placeholder="Nhập nội dung khác…"
+                  className="mt-1 w-full rounded-xl border border-slate-300 bg-white px-4 py-2 text-sm placeholder:text-slate-400 shadow-sm focus:outline-none focus:ring-2 focus:ring-[#ca0600] focus:border-[#ca0600]"
+                  disabled={readOnly}
+                />
+              </div>
+            </section>
+
+            {/* Q6 */}
+            <section className="mt-6">
+              <div className="text-sm font-medium text-slate-700">
+                8. Là một đại diện nhà thuốc, nếu nhãn hàng tổ chức một hoạt động khám chữa bệnh cộng đồng tại địa phương anh/chị muốn tham gia đồng hành không? 
+                <span className="block text-xs text-slate-500 mt-1">(1 sao: Không muốn tham gia - 5 sao: Rất muốn tham gia)</span>
+              </div>
+              <StarRow value={q6} onChange={setQ6} ariaLabelPrefix="Q6 chọn" readOnly={readOnly} />
+            </section>
+
             {/* Q8 – Ý kiến khác */}
             <section className="mt-6">
-              <label className="text-sm font-medium text-slate-700">Ý kiến khác về chương trình (nếu có)</label>
+              <label className="text-sm font-medium text-slate-700">Ý kiến khác về chương trình và cho nhãn hàng (nếu có):</label>
               <textarea
                 value={feedback}
                 onChange={(e) => setFeedback(e.target.value)}
